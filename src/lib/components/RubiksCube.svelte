@@ -412,7 +412,7 @@
 
   <div
     class="flex flex-wrap gap-2 justify-center mt-6"
-    style="max-width:520px;"
+    style="max-width:640px;"
   >
     {#each moves as { label, key }}
       <button
@@ -428,19 +428,19 @@
   <div class="flex gap-3 mt-4">
     <button
       on:click={scramble}
-      class="px-6 py-2.5 rounded-lg text-sm font-medium text-white
+      class="w-32 px-6 py-2.5 rounded-lg text-sm font-medium text-white
         transition-all duration-200 hover:opacity-85 hover:-translate-y-px"
       style="background: linear-gradient(135deg, #a78bfa, #60a5fa);"
     >
-      🔀 Scramble
+      Scramble
     </button>
     <button
       on:click={solve}
-      class="px-6 py-2.5 rounded-lg text-sm font-medium text-white
+      class="w-32 px-6 py-2.5 rounded-lg text-sm font-medium text-white
         transition-all duration-200 hover:opacity-85 hover:-translate-y-px"
       style="background: linear-gradient(135deg, #60a5fa, #34d399);"
     >
-      ✓ Solve
+      Solve
     </button>
   </div>
 </div>

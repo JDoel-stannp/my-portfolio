@@ -5,11 +5,11 @@
   import RubiksCube from "$lib/components/RubiksCube.svelte";
   import ParticleField from "$lib/components/ParticleField.svelte";
   import Diamond from "$lib/components/Diamond.svelte";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const words: string[] = ["Motion.", "Design.", "Interaction.", "Animation."];
+  const words: string[] = ["Motion", "Design", "Interaction", "Animation"];
   let wordIndex: number = 0;
   let currentWord: string = words[0];
 
@@ -265,18 +265,6 @@
   </div>
 </section>
 
-<!-- ── DIAMOND ────────────────────────────────────────────────────────── -->
-<section class="max-w-5xl mx-auto px-6 pb-24">
-  <div bind:this={reveal2}>
-    <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">Three.js</p>
-    <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">Diamond</h2>
-    <div
-      class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
-    ></div>
-    <Diamond />
-  </div>
-</section>
-
 <!-- ── RUBIK'S CUBE ───────────────────────────────────────────────────── -->
 <section class="max-w-5xl mx-auto px-6 pb-24">
   <div bind:this={reveal3}>
@@ -286,6 +274,18 @@
       class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
     ></div>
     <RubiksCube />
+  </div>
+</section>
+
+<!-- ── DIAMOND ────────────────────────────────────────────────────────── -->
+<section class="max-w-5xl mx-auto px-6 pb-24">
+  <div bind:this={reveal2}>
+    <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">Three.js</p>
+    <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">Diamond</h2>
+    <div
+      class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
+    ></div>
+    <Diamond />
   </div>
 </section>
 

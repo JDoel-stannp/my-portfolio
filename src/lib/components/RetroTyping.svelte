@@ -126,6 +126,43 @@
               {/if}
             </div>
           {/each}
+
+          <!-- CTA Button -->
+          {#if lines.length === steps.length}
+            <div class="mt-4 flex">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded font-mono text-xs
+                        text-emerald-400 border border-emerald-400/40 bg-emerald-400/5
+                        hover:bg-emerald-400/15 hover:border-emerald-400/70
+                        hover:shadow-[0_0_12px_rgba(52,211,153,0.2)]
+                        transition-all duration-300 group"
+                style="text-shadow: 0 0 6px #34d399"
+              >
+                <span
+                  class="text-emerald-600 group-hover:text-emerald-400 transition-colors"
+                  >&gt;</span
+                >
+                See my Svelte code &amp; work
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-3 h-3 opacity-60 group-hover:translate-x-1 group-hover:opacity-100 transition-all duration-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
+            </div>
+          {/if}
         </div>
       </div>
 
@@ -163,6 +200,37 @@
                 bg-gradient-to-b from-stone-300 to-stone-500
                 shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.4)]"
     ></div>
+
+    <!-- CTA Button -->
+    <a
+      href="https://github.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono text-sm
+              text-emerald-400 border border-emerald-400/40 bg-emerald-400/5
+              hover:bg-emerald-400/15 hover:border-emerald-400/70 hover:shadow-[0_0_18px_rgba(52,211,153,0.2)]
+              transition-all duration-300 group"
+    >
+      <span
+        class="text-emerald-600 group-hover:text-emerald-400 transition-colors"
+        >&gt;</span
+      >
+      See my Svelte code &amp; work
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 opacity-60 group-hover:translate-x-1 group-hover:opacity-100 transition-all duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+    </a>
   </div>
 </div>
 
