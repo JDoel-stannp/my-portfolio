@@ -8,24 +8,20 @@
     href: string;
   }
 
+  const FORMSPREE_URL = "https://formspree.io/f/myknpapl";
+
   const contactLinks: ContactLink[] = [
     {
       emoji: "📧",
       label: "Email",
-      value: "hello@jamesdoel.dev",
-      href: "mailto:hello@jamesdoel.dev",
+      value: "jd.stannp@gmail.com",
+      href: "mailto:hello@jamesdoel.com",
     },
     {
       emoji: "🐙",
       label: "GitHub",
       value: "github.com/JDoel-stannp",
       href: "https://github.com/JDoel-stannp",
-    },
-    {
-      emoji: "💼",
-      label: "LinkedIn",
-      value: "linkedin.com/in/jamesdoel",
-      href: "https://linkedin.com/in/jamesdoel",
     },
   ];
 
@@ -34,20 +30,37 @@
   let message: string = "";
   let sent: boolean = false;
   let sending: boolean = false;
+  let error: string = "";
   let visible: boolean = false;
 
   onMount(() => setTimeout(() => (visible = true), 100));
 
-  function handleSubmit(): void {
+  async function handleSubmit(): Promise<void> {
     sending = true;
-    setTimeout(() => {
+    error = "";
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (res.ok) {
+        sent = true;
+        name = "";
+        email = "";
+        message = "";
+        setTimeout(() => (sent = false), 4000);
+      } else {
+        error = "Something went wrong. Please try again.";
+      }
+    } catch {
+      error = "Network error. Please check your connection and try again.";
+    } finally {
       sending = false;
-      sent = true;
-      name = "";
-      email = "";
-      message = "";
-      setTimeout(() => (sent = false), 4000);
-    }, 1000);
+    }
   }
 </script>
 
@@ -135,8 +148,10 @@
             <div class="flex flex-col gap-2">
               <label
                 for="name"
-                class="text-xs uppercase tracking-widest text-muted">Name</label
+                class="text-xs uppercase tracking-widest text-muted"
               >
+                Name
+              </label>
               <input
                 id="name"
                 type="text"
@@ -152,8 +167,9 @@
               <label
                 for="email"
                 class="text-xs uppercase tracking-widest text-muted"
-                >Email</label
               >
+                Email
+              </label>
               <input
                 id="email"
                 type="email"
@@ -171,8 +187,9 @@
             <label
               for="message"
               class="text-xs uppercase tracking-widest text-muted"
-              >Message</label
             >
+              Message
+            </label>
             <textarea
               id="message"
               bind:value={message}
@@ -184,6 +201,10 @@
                 focus:border-accent focus:shadow-[0_0_0_3px_rgba(167,139,250,0.15)]"
             ></textarea>
           </div>
+
+          {#if error}
+            <p class="text-sm text-red-400">{error}</p>
+          {/if}
 
           <button
             type="submit"

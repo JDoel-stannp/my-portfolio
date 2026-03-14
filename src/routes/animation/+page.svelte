@@ -1,5 +1,5 @@
 <script lang="ts">
-  import showreel from "$lib/assets/Showcase-Reel-Banners.mp4?url";
+  import showreel from "$lib/assets/Showcase-Reel-Banners.mp4";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import RubiksCube from "$lib/components/RubiksCube.svelte";
@@ -33,6 +33,16 @@
   let reveal2: HTMLElement;
   let reveal3: HTMLElement;
   let reveal4: HTMLElement;
+  let reveal5: HTMLElement;
+
+  // SVGs served from /static — iframes allow SVGator scripts to run
+  const svgAnimations = [
+    {
+      src: "/hero_addressverification_animation_gator.svg",
+      label: "Address Verification",
+    },
+    { src: "/hero_retain_animation.svg", label: "Retain" },
+  ];
 
   onMount(async () => {
     await tick();
@@ -115,7 +125,7 @@
     });
 
     // ── Scroll: section reveals ────────────────────────────────────
-    [reveal0, reveal1, reveal2, reveal3, reveal4].forEach((el) => {
+    [reveal0, reveal1, reveal2, reveal3, reveal4, reveal5].forEach((el) => {
       if (!el) return;
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: "top 88%" },
@@ -277,7 +287,7 @@
   </div>
 </section>
 
-<!-- ── DIAMOND ────────────────────────────────────────────────────────── -->
+<!-- ── DNA HELIX ──────────────────────────────────────────────────────── -->
 <section class="max-w-5xl mx-auto px-6 pb-24">
   <div bind:this={reveal2}>
     <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">Three.js</p>
@@ -314,6 +324,46 @@
       >
         <track kind="captions" />
       </video>
+    </div>
+  </div>
+</section>
+
+<!-- ── SVGATOR ANIMATIONS ─────────────────────────────────────────────── -->
+<section class="max-w-5xl mx-auto px-6 pb-32">
+  <div bind:this={reveal5}>
+    <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">SVGator</p>
+    <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">
+      Animated Illustrations
+    </h2>
+    <div
+      class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
+    ></div>
+    <p class="text-muted text-lg max-w-2xl mb-12">
+      Animated SVG illustrations created for the Stannp platform using SVGator —
+      recognised and featured by SVGator on their website and social channels.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      {#each svgAnimations as { src, label }}
+        <div
+          class="rounded-xl border border-border bg-card p-6 flex flex-col items-center gap-4
+            hover:border-accent hover:-translate-y-1 transition-all duration-200"
+          onmouseenter={(e) => {
+            const iframe = e.currentTarget.querySelector("iframe");
+            if (iframe) {
+              iframe.src = iframe.src;
+            }
+          }}
+        >
+          <iframe
+            {src}
+            title={label}
+            class="w-full border-0"
+            style="height:200px;"
+            scrolling="no"
+          ></iframe>
+          <p class="text-sm text-muted">{label}</p>
+        </div>
+      {/each}
     </div>
   </div>
 </section>
