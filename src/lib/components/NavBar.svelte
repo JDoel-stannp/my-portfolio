@@ -12,7 +12,6 @@
     { href: "/svelte", label: "Svelte Dev" },
     { href: "/animation", label: "Animation" },
     { href: "/music", label: "Music" },
-    { href: "/photography", label: "Photography" },
     { href: "/contact", label: "Contact" },
   ];
 

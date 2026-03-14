@@ -4,7 +4,7 @@
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import RubiksCube from "$lib/components/RubiksCube.svelte";
   import ParticleField from "$lib/components/ParticleField.svelte";
-  import Diamond from "$lib/components/Diamond.svelte";
+  import DNAHelix from "$lib/components/DNAHelix.svelte";
   import { onMount, tick } from "svelte";
 
   gsap.registerPlugin(ScrollTrigger);
@@ -281,11 +281,11 @@
 <section class="max-w-5xl mx-auto px-6 pb-24">
   <div bind:this={reveal2}>
     <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">Three.js</p>
-    <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">Diamond</h2>
+    <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">DNA Helix</h2>
     <div
       class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
     ></div>
-    <Diamond />
+    <DNAHelix />
   </div>
 </section>
 
