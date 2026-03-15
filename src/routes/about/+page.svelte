@@ -53,30 +53,50 @@
   let visible: boolean = false;
   let visibleItems: boolean[] = timeline.map(() => false);
   let timelineEl: HTMLElement;
+  let headerEl: HTMLElement;
 
   onMount(() => {
-    setTimeout(() => (visible = true), 100);
-
-    const observer = new IntersectionObserver(
+    // Header + bio entrance — triggers when header scrolls into view
+    const headerObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            visible = true;
+          } else if (entry.boundingClientRect.top > 0) {
+            // Only reset when scrolling back up above the element
+            visible = false;
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    if (headerEl) headerObserver.observe(headerEl);
+
+    // Timeline entrance
+    const timelineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleItems = timeline.map(() => false);
             timeline.forEach((_, i) => {
               setTimeout(() => {
                 visibleItems[i] = true;
                 visibleItems = [...visibleItems];
               }, i * 800);
             });
-            observer.disconnect();
+          } else {
+            visibleItems = timeline.map(() => false);
           }
         });
       },
       { threshold: 0.2 },
     );
+    if (timelineEl) timelineObserver.observe(timelineEl);
 
-    observer.observe(timelineEl);
-
-    return () => observer.disconnect();
+    return () => {
+      headerObserver.disconnect();
+      timelineObserver.disconnect();
+    };
   });
 </script>
 
@@ -87,6 +107,7 @@
 <section class="max-w-5xl mx-auto px-6 pt-32 pb-24">
   <!-- Header -->
   <div
+    bind:this={headerEl}
     class="transition-all duration-700 {visible
       ? 'opacity-100 translate-y-0'
       : 'opacity-0 translate-y-6'}"
