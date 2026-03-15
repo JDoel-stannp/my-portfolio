@@ -104,14 +104,13 @@
     transition-all duration-700 delay-150
     {visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}"
   >
-    <!-- Portrait placeholder -->
+    <!-- Portrait -->
     <div class="flex flex-col items-center gap-4">
-      <div
-        class="w-48 h-48 md:w-60 md:h-60 rounded-2xl bg-card border border-border
-        flex items-center justify-center font-serif text-5xl text-accent"
-      >
-        JD
-      </div>
+      <img
+        src="/Image.webp"
+        alt="James Doel"
+        class="rounded-xl w-full max-w-[240px] object-cover"
+      />
       <div class="text-center">
         <p class="font-medium text-sm">James Doel</p>
         <p class="text-muted text-xs mt-0.5">
@@ -183,7 +182,6 @@
         <div class="flex gap-8" style="align-items:stretch;">
           <!-- Dot + Line -->
           <div class="flex flex-col items-center flex-shrink-0 w-14">
-            <!-- Dot -->
             <div
               class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0
               border-[3px] border-accent"
@@ -198,7 +196,6 @@
                 style="box-shadow:0 0 8px rgba(167,139,250,0.9);"
               ></div>
             </div>
-            <!-- Line -->
             {#if i < timeline.length - 1}
               <div
                 class="w-[3px] flex-1"
