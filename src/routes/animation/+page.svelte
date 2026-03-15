@@ -92,13 +92,21 @@
     // ── Scroll: stagger cards ──────────────────────────────────────
     const cards = [card0, card1, card2].filter(Boolean);
     if (cards.length) {
-      gsap.from(cards, {
-        scrollTrigger: { trigger: cards[0], start: "top 85%" },
-        opacity: 0,
-        y: 60,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power3.out",
+      cards.forEach((card, i) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(60px)";
+        card.style.transition = `opacity 0.7s ease ${i * 0.15}s, transform 0.7s ease ${i * 0.15}s`;
+        const obs = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              card.style.opacity = "1";
+              card.style.transform = "translateY(0)";
+              obs.disconnect();
+            }
+          },
+          { threshold: 0.1 },
+        );
+        obs.observe(card);
       });
     }
 
@@ -201,26 +209,8 @@
   </div>
 </section>
 
-<!-- ── STATS ─────────────────────────────────────────────────────────── -->
-<section class="max-w-5xl mx-auto px-6 pb-24">
-  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem;">
-    <div class="rounded-2xl p-8 text-center border border-border bg-card">
-      <p class="font-serif text-5xl text-accent mb-2" bind:this={stat0}>0</p>
-      <p class="text-muted text-sm">Projects Shipped</p>
-    </div>
-    <div class="rounded-2xl p-8 text-center border border-border bg-card">
-      <p class="font-serif text-5xl text-accent mb-2" bind:this={stat1}>0</p>
-      <p class="text-muted text-sm">Animations Created</p>
-    </div>
-    <div class="rounded-2xl p-8 text-center border border-border bg-card">
-      <p class="font-serif text-5xl text-accent mb-2" bind:this={stat2}>0</p>
-      <p class="text-muted text-sm">Years Experience</p>
-    </div>
-  </div>
-</section>
-
 <!-- ── WORK ──────────────────────────────────────────────────────────── -->
-<section id="work" class="max-w-5xl mx-auto px-6 pb-24">
+<section id="work" class="max-w-5xl mx-auto px-6 pb-16">
   <div bind:this={reveal0}>
     <p class="text-xs tracking-[0.2em] uppercase text-accent mb-3">What I Do</p>
     <h2 class="font-serif text-[clamp(2rem,5vw,3rem)] mb-4">Animation Work</h2>
@@ -228,6 +218,17 @@
       class="w-12 h-0.5 bg-gradient-to-r from-accent to-accent2 rounded mb-12"
     ></div>
   </div>
+
+  <p class="text-[#aaaaaa] text-[1.05rem] leading-relaxed max-w-2xl mb-6">
+    I specialise in bringing interfaces to life — from subtle micro-interactions
+    that make a UI feel polished, to full motion graphics and animated
+    illustrations built for production. My toolset spans GSAP for
+    timeline-driven animation, SVGator for scalable animated SVG illustrations,
+    Three.js for interactive 3D and WebGL experiences, and CSS for precise,
+    performant transitions. I care deeply about the relationship between motion
+    and meaning: every animation should serve a purpose, guide attention, and
+    make an interface more intuitive — not just more impressive.
+  </p>
 
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
     <div
